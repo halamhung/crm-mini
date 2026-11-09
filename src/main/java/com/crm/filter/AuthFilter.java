@@ -66,7 +66,7 @@ public class AuthFilter implements Filter {
             return;
         }
 
-        // Moi form POST gui kem token cua session, ke ca form dang nhap.
+       
         if (request.getMethod().equals("POST")) {
             String csrf = request.getParameter("csrf");
             if (!session.getAttribute("csrf").equals(csrf)) {
