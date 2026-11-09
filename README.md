@@ -2,9 +2,11 @@
 
 Ứng dụng quản lý nhân viên, dự án và công việc bằng Servlet/JSP/JDBC.
 
+**Website demo: https://crm-lam-hung.onrender.com/crm/**
+
 ## Công nghệ
 
-Java 17, Tomcat 9, Maven, MySQL 8. Source dùng package com.crm.
+Java 17, Tomcat 9, Maven, MySQL. Source dùng package com.crm. Bản demo cloud hiện dùng MySQL 5.7 của Filess.io Free; bản local có thể dùng MySQL 8.
 
 ## Chạy trên hosting
 
@@ -51,4 +53,6 @@ mvn clean package
 Kết quả: target/crm.war. Có 8 kiểm thử Java/H2.
 
 Giao diện có UTF-8 và chân trang Created by Lâm Hùng.
-Chưa có link công khai cho đến khi thực hiện deploy thành công trên tài khoản hosting.
+Bản demo đã deploy trên Render Free và kiểm tra thành công 54 tình huống HTTP. Render có thể ngủ khi không hoạt động; lần mở lại có thể chờ khoảng một phút.
+
+Kết nối MySQL của bản demo dùng TLS sslMode=REQUIRED theo lựa chọn của chủ dự án, không xác minh chứng chỉ máy chủ. Chỉ dùng dữ liệu mẫu; khi dùng dữ liệu thật cần cấu hình chứng chỉ tin cậy. MySQL 5.7 không cưỡng chế CHECK; Servlet vẫn kiểm tra ngày và trạng thái.
