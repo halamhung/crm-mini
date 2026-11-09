@@ -121,6 +121,58 @@ public class MiniCrmTest {
     }
 
     @Test
+    public void joinedMemberSeesProjectBeforeAssignment() throws Exception {
+        User member = createMember("joined@crm.local");
+        projectDAO.addMember(1, member.getId());
+
+        assertEquals(1, projectDAO.findVisible(member).size());
+        assertTrue(taskDAO.findVisible(member).isEmpty());
+        Statistic statistic = new StatisticDAO().findByProject(member).get(0);
+        assertEquals(0, statistic.getTotal());
+        assertEquals(0, statistic.getCompletedPercent());
+        assertTrue(new StatisticDAO().findByEmployee(member).isEmpty());
+    }
+
+    @Test
+    public void joinedMemberSeesOnlyOwnAssignedTasksAndStatistics() throws Exception {
+        User member = createMember("assigned@crm.local");
+        projectDAO.addMember(1, member.getId());
+        Task task = taskDAO.findById(1);
+        task.setName("Việc của thành viên mới");
+        task.setAssigneeId(member.getId());
+        taskDAO.insert(task);
+
+        assertEquals(1, taskDAO.findVisible(member).size());
+        assertEquals(1, new StatisticDAO().findByProject(member).get(0).getTotal());
+        assertEquals(3, taskDAO.findVisible(userDAO.findById(3)).size());
+        assertEquals(3, new StatisticDAO().findByProject(userDAO.findById(3)).get(0).getTotal());
+    }
+
+    @Test
+    public void unrelatedOrRemovedMemberCannotSeeProject() throws Exception {
+        User member = createMember("outside@crm.local");
+        assertTrue(projectDAO.findVisible(member).isEmpty());
+        assertTrue(new StatisticDAO().findByProject(member).isEmpty());
+        projectDAO.addMember(1, member.getId());
+        assertEquals(1, projectDAO.findVisible(member).size());
+        projectDAO.removeMember(1, member.getId());
+        assertTrue(projectDAO.findVisible(member).isEmpty());
+        assertTrue(new StatisticDAO().findByProject(member).isEmpty());
+    }
+
+    private User createMember(String email) throws Exception {
+        User user = new User();
+        user.setName("Thành viên kiểm thử");
+        user.setEmail(email);
+        user.setPassword("unused-test-hash");
+        user.setAddress("");
+        user.setPhone("");
+        user.setRoleId(3);
+        userDAO.insert(user);
+        return userDAO.findByEmail(email);
+    }
+
+    @Test
     public void validationAndDemoPasswordWork() throws Exception {
         assertTrue(BCrypt.checkpw("111112113", userDAO.findById(1).getPassword()));
         assertThrows(IllegalArgumentException.class, () -> WebUtil.checkPassword("123"));

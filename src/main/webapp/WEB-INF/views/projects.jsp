@@ -4,6 +4,9 @@
     List<Project> projects = (List<Project>) request.getAttribute("projects");
 %>
 <h2>Danh sách dự án</h2>
+<% if (!currentUser.isManager()) { %>
+<p class="page-description">Các dự án bạn đã được thêm vào. Công việc được giao nằm ở mục Công việc.</p>
+<% } %>
 <div class="table-wrap">
 <table>
     <tr><th>ID</th><th>Tên dự án</th><th>Mô tả</th><th>Bắt đầu</th><th>Kết thúc</th><th>Quản lý</th>
@@ -92,7 +95,7 @@
     <label>Chọn nhân viên để thêm vào dự án</label>
     <select name="userId" required>
         <% for (User user : users) { if (user.getRoleId() == 3) { %>
-        <option value="<%= user.getId() %>"><%= WebUtil.escape(user.getName()) %></option>
+        <option value="<%= user.getId() %>"><%= WebUtil.escape(user.getName()) %> - <%= WebUtil.escape(user.getEmail()) %></option>
         <% } } %>
     </select>
     <button type="submit">Thêm thành viên</button>

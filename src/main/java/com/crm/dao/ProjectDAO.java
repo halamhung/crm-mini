@@ -32,7 +32,8 @@ public class ProjectDAO {
             if (user.isManager()) {
                 sql += " WHERE p.owner_id=?";
             } else {
-                sql += " WHERE EXISTS (SELECT 1 FROM tasks t WHERE t.project_id=p.id AND t.assignee_id=?)";
+                // Thành viên được thấy dự án ngay khi được thêm, kể cả chưa được giao việc.
+                sql += " WHERE EXISTS (SELECT 1 FROM project_members pm WHERE pm.project_id=p.id AND pm.user_id=?)";
             }
         }
         sql += " ORDER BY p.id";

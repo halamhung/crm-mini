@@ -45,7 +45,13 @@
     <% } %>
 </table>
 </div>
-<% if (tasks.isEmpty()) { %><p>Chưa có công việc.</p><% } %>
+<% if (tasks.isEmpty()) { %>
+    <% if (currentUser.isManager()) { %>
+        <p>Chưa có công việc.</p>
+    <% } else { %>
+        <p>Bạn chưa được giao công việc. Các dự án đã tham gia nằm ở mục Dự án.</p>
+    <% } %>
+<% } %>
 <% if (currentUser.isManager()) {
     List<Project> projects = (List<Project>) request.getAttribute("projects");
     List<ProjectMember> members = (List<ProjectMember>) request.getAttribute("members");
@@ -79,7 +85,7 @@
     <label>Người thực hiện (thành viên của dự án)</label>
     <select name="assigneeId" required>
         <% for (ProjectMember member : members) { %>
-        <option value="<%= member.getUserId() %>" <%= member.getUserId() == editTask.getAssigneeId() ? "selected" : "" %>><%= WebUtil.escape(member.getUserName()) %></option>
+        <option value="<%= member.getUserId() %>" <%= member.getUserId() == editTask.getAssigneeId() ? "selected" : "" %>><%= WebUtil.escape(member.getUserName()) %> - <%= WebUtil.escape(member.getEmail()) %></option>
         <% } %>
     </select>
     <label>Trạng thái</label>
