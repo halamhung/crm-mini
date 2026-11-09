@@ -1,0 +1,397 @@
+/* Giao diện CRM dùng CSS thuần. */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f2f5f9;
+    color: #26354a;
+    font: 14px/1.5 "Segoe UI", Arial, sans-serif;
+}
+
+a {
+    color: #2563aa;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.topbar {
+    min-height: 72px;
+    background: white;
+    border-bottom: 1px solid #dde4ee;
+    padding: 12px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    color: #233d61;
+}
+
+.brand strong {
+    background: #2563aa;
+    color: white;
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 22px;
+}
+
+.brand span {
+    font-size: 17px;
+    font-weight: 600;
+}
+
+.account-info {
+    text-align: right;
+}
+
+.account-info span, .account-info small {
+    display: block;
+}
+
+.account-info small {
+    color: #6b7c92;
+}
+
+.app-layout {
+    display: grid;
+    grid-template-columns: 215px minmax(0, 1fr);
+    min-height: calc(100vh - 72px);
+}
+
+.sidebar {
+    background: #22364f;
+    padding: 24px 14px;
+}
+
+.menu-label {
+    color: #a9b9ce;
+    font-size: 11px;
+    letter-spacing: 1px;
+    padding: 0 12px;
+    margin: 6px 0 12px;
+}
+
+.sidebar a {
+    display: block;
+    color: #e1e9f4;
+    padding: 11px 14px;
+    margin: 4px 0;
+    border-radius: 5px;
+}
+
+.sidebar a:hover, .sidebar a.active {
+    color: white;
+    background: #31577e;
+    text-decoration: none;
+}
+
+.sidebar .menu-label:not(:first-child) {
+    margin-top: 30px;
+}
+
+.logout-form {
+    padding: 0 14px;
+    margin-top: 12px;
+}
+
+.logout-form button {
+    background: transparent;
+    color: #dce6f2;
+    border-color: #657b95;
+}
+
+.page-content {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    padding: 28px;
+    flex: 1;
+    min-width: 0;
+}
+
+h2 {
+    font-size: 24px;
+    margin: 0 0 12px;
+}
+
+h3 {
+    font-size: 17px;
+    margin: 26px 0 12px;
+}
+
+.page-description {
+    color: #68798e;
+    margin-top: 0;
+}
+
+.table-wrap {
+    overflow-x: auto;
+    background: white;
+    border: 1px solid #dce3ec;
+    border-radius: 6px;
+    margin: 16px 0 24px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap;
+}
+
+th, td {
+    padding: 13px 15px;
+    border-bottom: 1px solid #e4eaf1;
+    text-align: left;
+    vertical-align: middle;
+}
+
+th {
+    background: #eaf0f7;
+    color: #4b607a;
+    font-weight: 600;
+}
+
+tr:last-child td {
+    border-bottom: 0;
+}
+
+tr:hover td {
+    background: #f8fafd;
+}
+
+.edit-form, .login-box {
+    padding: 22px;
+    max-width: 740px;
+    background: white;
+    border: 1px solid #dce3ec;
+    border-radius: 6px;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    margin: 12px 0 6px;
+}
+
+label:first-of-type {
+    margin-top: 0;
+}
+
+input, select, textarea, button {
+    font: inherit;
+    border-radius: 4px;
+    padding: 9px 11px;
+}
+
+input, select, textarea {
+    color: #26354a;
+    background: white;
+    border: 1px solid #bdcada;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: 2px solid #c0d6ef;
+    outline-offset: 1px;
+}
+
+.edit-form input:not([type="hidden"]), .edit-form select, .edit-form textarea,
+.login-box input:not([type="hidden"]) {
+    width: 100%;
+    display: block;
+    margin-bottom: 12px;
+}
+
+textarea {
+    resize: vertical;
+}
+
+button {
+    background: #2563aa;
+    color: white;
+    border: 1px solid #2563aa;
+    cursor: pointer;
+}
+
+button:hover {
+    filter: brightness(.93);
+}
+
+.edit-form > a {
+    display: inline-block;
+    margin-left: 14px;
+}
+
+.inline-form {
+    display: inline-block;
+    margin-left: 8px;
+}
+
+.inline-form select {
+    max-width: 170px;
+}
+
+.inline-form button {
+    padding: 6px 11px;
+}
+
+.delete {
+    background: #fff1f1;
+    color: #b33535;
+    border-color: #efc4c4;
+}
+
+.error {
+    padding: 14px 16px;
+    background: #fff0f0;
+    border: 1px solid #edc5c5;
+    border-radius: 5px;
+    color: #a82f2f;
+}
+
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+    margin: 22px 0;
+}
+
+.summary-box {
+    padding: 20px;
+    background: white;
+    border: 1px solid #dce3ec;
+    border-top: 3px solid #2563aa;
+    border-radius: 5px;
+}
+
+.summary-box span, .summary-box strong {
+    display: block;
+}
+
+.summary-box span {
+    color: #65758b;
+}
+
+.summary-box strong {
+    font-size: 30px;
+    margin-top: 8px;
+}
+
+.summary-box.pending {
+    border-top-color: #8a98aa;
+}
+
+.summary-box.active-work {
+    border-top-color: #d59a30;
+}
+
+.summary-box.completed {
+    border-top-color: #3d9b72;
+}
+
+.status, .role-badge {
+    display: inline-block;
+    padding: 4px 9px;
+    border-radius: 4px;
+    background: #eaf0f7;
+    color: #466080;
+    font-size: 12px;
+}
+
+.status-1 {
+    background: #fff2d6;
+    color: #906317;
+}
+
+.status-2 {
+    background: #e2f3ea;
+    color: #267650;
+}
+
+footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 18px 28px;
+    color: #68798e;
+    border-top: 1px solid #dce3ec;
+    font-size: 13px;
+}
+
+.login-page .app-layout {
+    display: block;
+}
+
+.login-page .page-content {
+    min-height: calc(100vh - 72px);
+}
+
+.login-box {
+    max-width: 430px;
+    margin: 48px auto;
+    padding: 30px;
+}
+
+.login-box button {
+    width: 100%;
+    margin-top: 12px;
+}
+
+@media (max-width: 900px) {
+    .app-layout {
+        grid-template-columns: 180px minmax(0, 1fr);
+    }
+    .summary-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    main {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 600px) {
+    .app-layout {
+        display: block;
+    }
+    .sidebar {
+        padding: 10px;
+    }
+    .sidebar a {
+        display: inline-block;
+        padding: 8px 10px;
+    }
+    .sidebar .menu-label {
+        display: none;
+    }
+    .logout-form {
+        display: inline-block;
+        padding: 0;
+        margin: 0;
+    }
+    .topbar {
+        padding: 12px 16px;
+    }
+    .brand span {
+        display: none;
+    }
+    main {
+        padding: 16px;
+    }
+    footer {
+        flex-direction: column;
+        padding: 16px;
+    }
+}

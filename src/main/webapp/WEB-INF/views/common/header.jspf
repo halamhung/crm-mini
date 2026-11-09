@@ -1,0 +1,59 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@ page import="java.util.List,com.crm.model.*,com.crm.util.WebUtil" %>
+<%
+    User currentUser = (User) request.getAttribute("currentUser");
+    String contextPath = request.getContextPath();
+    String currentPath = (String) request.getAttribute("javax.servlet.forward.servlet_path");
+    if (currentPath == null) {
+        currentPath = request.getServletPath();
+    }
+    String error = (String) request.getAttribute("error");
+    if (error == null) {
+        error = (String) session.getAttribute("error");
+        session.removeAttribute("error");
+    }
+%>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>CRM - Quản lý công việc</title>
+    <link rel="stylesheet" href="<%= contextPath %>/style.css?v=5">
+</head>
+<body class="<%= currentUser == null ? "login-page" : "" %>">
+<header class="topbar">
+    <a class="brand" href="<%= contextPath %>/"><strong>CRM</strong><span>Quản lý công việc</span></a>
+    <% if (currentUser != null) { %>
+        <div class="account-info">
+            <span><%= WebUtil.escape(currentUser.getName()) %></span>
+            <small><%= currentUser.getRoleName() %></small>
+        </div>
+    <% } %>
+</header>
+<div class="app-layout">
+<% if (currentUser != null) { %>
+<nav class="sidebar" aria-label="Menu chính">
+    <p class="menu-label">QUẢN LÝ NỘI BỘ</p>
+    <a class="<%= currentPath.equals("") || currentPath.equals("/") ? "active" : "" %>" href="<%= contextPath %>/">Tổng quan</a>
+    <a class="<%= currentPath.equals("/projects") ? "active" : "" %>" href="<%= contextPath %>/projects">Dự án</a>
+    <a class="<%= currentPath.equals("/tasks") ? "active" : "" %>" href="<%= contextPath %>/tasks">Công việc</a>
+    <% if (currentUser.isManager()) { %>
+        <a class="<%= currentPath.equals("/users") ? "active" : "" %>" href="<%= contextPath %>/users">Nhân viên</a>
+    <% } %>
+    <% if (currentUser.isAdmin()) { %>
+        <a class="<%= currentPath.equals("/roles") ? "active" : "" %>" href="<%= contextPath %>/roles">Phân quyền</a>
+    <% } %>
+    <p class="menu-label">TÀI KHOẢN</p>
+    <a class="<%= currentPath.equals("/profile") ? "active" : "" %>" href="<%= contextPath %>/profile">Thông tin cá nhân</a>
+    <form method="post" action="<%= contextPath %>/logout" class="logout-form">
+        <%@ include file="csrf.jspf" %>
+        <button type="submit">Đăng xuất</button>
+    </form>
+</nav>
+<% } %>
+<div class="page-content">
+<main>
+<% if (error != null) { %>
+    <p class="error"><%= WebUtil.escape(error) %></p>
+<% } %>

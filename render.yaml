@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: crm-lam-hung
+    runtime: docker
+    plan: free
+    region: singapore
+    healthCheckPath: /crm/login
+    envVars:
+      - key: PORT
+        value: "8080"
+      - key: JAVA_OPTS
+        value: "-Xms64m -Xmx256m -Dfile.encoding=UTF-8"
+      - key: DB_URL
+        sync: false
+      - key: DB_USER
+        sync: false
+      - key: DB_PASSWORD
+        sync: false
