@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {
-    // Chuyển một dòng kết quả SQL thành một đối tượng User.
+
     private User readUser(ResultSet rs) throws SQLException {
         User user = new User();
         user.setId(rs.getInt("id"));
@@ -64,7 +64,7 @@ public class UserDAO {
         return null;
     }
 
-    // Dấu ? là tham số, được gán bằng các lệnh setString/setInt bên dưới.
+  
     public void insert(User user) throws SQLException {
         String sql = "INSERT INTO users(email, password, name, address, phone, role_id) VALUES(?, ?, ?, ?, ?, ?)";
         try (Connection connection = DBConnection.getConnection();
@@ -79,7 +79,6 @@ public class UserDAO {
         }
     }
 
-    // Mat khau truyen vao da duoc bam, hoac giu lai mat khau cu neu khong doi.
     public void update(User user) throws SQLException {
         String sql = "UPDATE users SET email=?, password=?, name=?, address=?, phone=?, role_id=? WHERE id=?";
         try (Connection connection = DBConnection.getConnection();
