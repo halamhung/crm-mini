@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-// Cac ham nho dung chung giua cac Servlet.
 public class BaseServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
