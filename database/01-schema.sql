@@ -1,7 +1,3 @@
--- Đọc file SQL bằng UTF-8 khi khởi tạo MySQL trong Docker.
-SET NAMES utf8mb4;
-
--- 1. Tạo các bảng trước, chưa thêm khóa ngoại.
 CREATE TABLE roles (
     id INT PRIMARY KEY,
     name VARCHAR(30) NOT NULL UNIQUE,
@@ -47,7 +43,7 @@ CREATE TABLE tasks (
     CHECK (end_date >= start_date)
 );
 
--- 2. Dùng ALTER TABLE để tạo các quan hệ khóa ngoại.
+
 ALTER TABLE users
     ADD CONSTRAINT fk_users_roles
     FOREIGN KEY (role_id) REFERENCES roles(id);
@@ -65,7 +61,7 @@ ALTER TABLE project_members
     ADD CONSTRAINT fk_project_members_users
     FOREIGN KEY (user_id) REFERENCES users(id);
 
--- Khóa ngoại ghép: người được giao việc phải thuộc đúng dự án.
+
 ALTER TABLE tasks
     ADD CONSTRAINT fk_tasks_project_members
     FOREIGN KEY (project_id, assignee_id)
