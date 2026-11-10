@@ -30,7 +30,7 @@ public class ProjectServlet extends BaseServlet {
                 Project editProject = new Project();
                 editProject.setOwnerId(user.getId());
                 int id = WebUtil.number(request, "id");
-                // Kiểm tra quyền trước khi thay đổi dự án đã có.
+           
                 if (id > 0) {
                     editProject = projectDAO.findById(id);
                     PermissionUtil.requireProject(user, editProject);
